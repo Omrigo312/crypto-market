@@ -12,4 +12,18 @@ function fetchData() {
     .catch((msg) => console.error(msg));
 }
 
-window.onload = fetchData();
+$(document).ready(function () {
+  fetchData();
+  navbarActiveState();
+});
+
+function navbarActiveState() {
+  $('ul li').on('click', function () {
+    $('ul li').each(function () {
+      if ($(this).hasClass('active')) {
+        $(this).removeClass('active');
+      }
+    });
+    $(this).addClass('active');
+  });
+}

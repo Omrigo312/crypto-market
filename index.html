@@ -10,6 +10,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <link rel="stylesheet" href="style.css" />
     <link
       rel="icon"
@@ -18,6 +19,65 @@
     />
   </head>
   <body>
+    <nav
+      class="navbar navbar-expand-sm navbar-light bg-light justify-content-between"
+    >
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Live Reports</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+      </ul>
+
+      <form class="form-inline my-2 my-lg-0">
+        <input
+          class="form-control mr-sm-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <input
+          class="btn btn-outline-success my-2 my-sm-0"
+          type="button"
+          value="Search"
+        />
+      </form>
+    </nav>
+
+    <section id="coinBoard">
+      <h1 class="h2 text-center pt-5">Coins</h1>
+      <hr width="30%" />
+      <div class="container text-muted">
+        <div class="row text-center">
+          <div class="card col-12 col-md-3 left">
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <h5 class="card-title">BTC</h5>
+                <input type="checkbox" id="switch" /><label
+                  for="switch"
+                ></label>
+              </div>
+              <p class="card-text">Bitcoin</p>
+              <a href="#" class="btn btn-primary">More Info</a>
+            </div>
+          </div>
+          <div class="card col-12 col-md-3 left">
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <h5 class="card-title">BTC</h5>
+              </div>
+              <p class="card-text">Bitcoin</p>
+              <a href="#" class="btn btn-primary">More Info</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <script src="main.js"></script>
   </body>
 </html>
