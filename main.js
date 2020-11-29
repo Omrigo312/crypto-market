@@ -12,6 +12,17 @@ function fetchData() {
     .catch((msg) => console.error(msg));
 }
 
+$(window).scroll(function () {
+  if ($(window).scrollTop() >= 50) {
+    $('.navbar').removeClass('navbar-transparent');
+    $('.navbar').addClass('navbar-light');
+  } else {
+    $('.navbar').removeClass('navbar-light');
+    $('.navbar').addClass('navbar-transparent');
+
+  }
+});
+
 $(document).ready(function () {
   fetchData();
   navbarActiveState();
