@@ -5,7 +5,7 @@ function fetchData() {
     .then(function (data) {
       for (let coin of data) {
         for (let key of Object.keys(coin)) {
-          console.log(key, data[0][key]);
+          // console.log(key, data[0][key]);
         }
       }
     })
@@ -26,4 +26,17 @@ function navbarActiveState() {
     });
     $(this).addClass('active');
   });
+}
+
+function moreInfo(button) {
+  let coinBox = $(button).closest('.card');
+  let collapse = $(coinBox).find('.multi-collapse');
+  if (!collapse.attr('class').split(' ').includes('show')) {
+    coinBox.removeClass('coin-box');
+  } else {
+    setTimeout(() => {
+      coinBox.addClass('coin-box');
+    }, 250);
+  }
+  console.log(coinBox.attr('class'));
 }
