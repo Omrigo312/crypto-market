@@ -2,6 +2,7 @@ const COINS_API_URL = 'https://api.coingecko.com/api/v3/coins';
 const COINS_INFO_API_URL = 'https://api.coingecko.com/api/v3/coins/';
 const TWO_MINS = 1000 * 60 * 2;
 const MAX_COINS_TO_TRACK = 5;
+let allCoins = {};
 let coinsToTrack = [];
 let stagingCoinsToTrack = [];
 
@@ -13,10 +14,11 @@ $(document).ready(() => {
 });
 
 function displayCoinCards() {
+  $('#coinsRow').empty();
   $.get(COINS_API_URL)
     .then(function (data) {
       for (let coin of data) {
-        localStorage.setItem(coin.id, JSON.stringify(coin));
+        allCoins[coin.id] = coin;
         const coinCard = createCoinCard(coin);
         $('#coinsRow').append(coinCard);
       }
@@ -26,7 +28,28 @@ function displayCoinCards() {
 
 function onSearchButtonClicked() {
   searchedTerm = $('#searchBar').prop('value');
-  console.log(searchedTerm);
+  if (!searchedTerm) {
+    return displayCoinCards();
+  }
+  for (let [id, coinData] of Object.entries(allCoins)) {
+    if (searchedTerm == coinData.symbol) {
+      return showSearchResult(id, coinData);
+    }
+  }
+}
+
+function showSearchResult(id = null, data = null) {
+  if (data) {
+    $('#coinsRow').empty();
+    const coinCard = createCoinCard(data);
+    $('#coinsRow').append(coinCard);
+    $('#coinsRow').append(
+      `<div class="mt-2 col-12"><button class="btn btn-primary" onclick="displayCoinCards()">Show All Coins</button></div>`
+    );
+    if (coinsToTrack.includes(id)) {
+      handleCheckBox(id, true);
+    }
+  }
 }
 
 function createCoinCard(coinData) {
@@ -102,7 +125,7 @@ function displayModal() {
   $('#confirmButton').prop('disabled', true);
   $('#modalCoinsRow').empty();
   for (let coin of coinsToTrack) {
-    const coinData = JSON.parse(localStorage.getItem(coin));
+    const coinData = allCoins[coin];
     $('#modalCoinsRow').append(createCoinCardModal(coinData));
   }
   $('#coinsModal').modal();

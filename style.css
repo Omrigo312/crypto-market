@@ -41,6 +41,10 @@ body {
   }
 }
 
+#searchBar {
+  text-transform: uppercase;
+}
+
 .navbar a {
   font-size: large;
   border-radius: 1rem;
@@ -124,13 +128,18 @@ body {
 }
 
 .modal {
-  color: black;
+  color: white;
   text-align: center;
 }
 
+.modal-content {
+  background-image: url('./assets/images/card.jpg');
+  background-size: cover;
+}
+
 .modal-card {
-  color: white;
-  background: url('./assets/images/card.jpg');
+  color: black;
+  background-color: rgb(255, 255, 255, 0.85);
   background-size: cover;
   border: black 1px solid;
   border-radius: 0.5rem;
@@ -155,7 +164,7 @@ label {
   cursor: pointer;
   width: 4rem;
   height: 2rem;
-  background: rgb(0,0,0,.5);
+  background: rgb(0, 0, 0, 0.5);
   display: block;
   border-radius: 1rem;
   position: relative;
