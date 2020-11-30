@@ -29,7 +29,7 @@ function createCoinCard(coinData) {
         href="#${id}Collapse"
         role="button"
         aria-expanded="false"
-        class="btn btn-primary"
+        class="btn more-info"
         id="${id}"
         onclick="onMoreInfoButtonPress(this)"
         >More Info</a

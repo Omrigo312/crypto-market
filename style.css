@@ -22,11 +22,17 @@ body {
   margin-bottom: 15rem;
 }
 
-.card .btn {
+.more-info {
+  color:white;
   background: url('./assets/images/button.png');
   background-size: cover;
   border: black 1px solid;
   border-radius: 0.5rem;
+}
+
+.more-info:hover{
+  color:white;
+  background-color: black;
 }
 
 @media (max-width:420px){
