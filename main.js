@@ -1,8 +1,9 @@
 const COINS_API_URL = 'https://api.coingecko.com/api/v3/coins';
 const COINS_INFO_API_URL = 'https://api.coingecko.com/api/v3/coins/';
 const TWO_MINS = 1000 * 60 * 2;
-const MAX_COINS_TO_TRACK = 1;
-let coinsToTrack = new Set();
+const MAX_COINS_TO_TRACK = 5;
+let coinsToTrack = [];
+let stagingCoinsToTrack = [];
 
 $(document).ready(() => {
   $('#coinBoard').css('margin-top', $('.navbar').height());
@@ -23,6 +24,11 @@ function displayCoinCards() {
     .catch((msg) => console.error(msg));
 }
 
+function onSearchButtonClicked() {
+  searchedTerm = $('#searchBar').prop('value');
+  console.log(searchedTerm);
+}
+
 function createCoinCard(coinData) {
   const { id, symbol, name } = coinData;
   const coinCard = `
@@ -41,7 +47,7 @@ function createCoinCard(coinData) {
         role="button"
         aria-expanded="false"
         class="btn more-info-btn"
-        onclick="onMoreInfoButtonPress(this, '${id}')"
+        onclick="onMoreInfoButtonClick(this, '${id}')"
       >More Info</a>
       <div class="collapse multi-collapse" id="${id}Collapse"></div>
     </div>
@@ -67,32 +73,33 @@ function createCoinCardModal(coinData) {
 }
 
 function trackCoin(coinSwitch, id) {
-  if ($(coinSwitch).attr('checked')) {
-    handleCheckBox([id], false);
-    coinsToTrack.delete(id);
+  if (!$(coinSwitch).prop('checked')) {
+    $('#confirmButton').prop('disabled', false);
+    handleCheckBox(id, false);
+    coinsToTrack.splice(coinsToTrack.indexOf(id), 1);
   } else {
-    handleCheckBox([id], true);
-    coinsToTrack.add(id);
-    if (
-      coinsToTrack.size > MAX_COINS_TO_TRACK &&
-      !$('#coinsModal').hasClass('show')
-    ) {
-      displayModal();
+    handleCheckBox(id, true);
+    coinsToTrack.push(id);
+    const modalOn = $('#coinsModal').hasClass('show');
+    if (coinsToTrack.length > MAX_COINS_TO_TRACK) {
+      if (!modalOn) {
+        stagingCoinsToTrack = coinsToTrack.slice();
+        displayModal();
+      } else {
+        $('#confirmButton').prop('disabled', true);
+      }
     }
   }
-  console.log(coinsToTrack);
 }
 
-function handleCheckBox(ids, check) {
-  for (let id of ids) {
-    console.log($(`.${id}Switch`).length);
-    $(`.${id}Switch`).each(function () {
-      $(this).attr('checked', check);
-    });
-  }
+function handleCheckBox(id, check) {
+  $(`.${id}Switch`).each(function () {
+    $(this).prop('checked', check);
+  });
 }
 
 function displayModal() {
+  $('#confirmButton').prop('disabled', true);
   $('#modalCoinsRow').empty();
   for (let coin of coinsToTrack) {
     const coinData = JSON.parse(localStorage.getItem(coin));
@@ -101,10 +108,17 @@ function displayModal() {
   $('#coinsModal').modal();
 }
 
-function onMoreInfoButtonPress(button, id) {
+function onCancelButtonClicked() {
+  coinsToTrack = stagingCoinsToTrack;
+  for (let coin of coinsToTrack) {
+    handleCheckBox(coin, true);
+  }
+  handleCheckBox(coinsToTrack.pop(), false);
+}
+
+function onMoreInfoButtonClick(button, id) {
   const coinBox = $(button).closest('.card');
   const collapse = $(coinBox).find('.multi-collapse');
-  // const id = $(button).attr('id');
   const collapserClassArray = collapse.attr('class').split(' ');
 
   // Do nothing during collapse

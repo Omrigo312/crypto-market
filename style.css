@@ -155,13 +155,13 @@ label {
   cursor: pointer;
   width: 4rem;
   height: 2rem;
-  background: grey;
+  background: rgb(0,0,0,.5);
   display: block;
   border-radius: 1rem;
   position: relative;
 }
 
-label::after {
+label:after {
   content: '';
   position: absolute;
   top: 5px;
@@ -174,7 +174,12 @@ label::after {
 }
 
 input:checked + label {
-  background: #bada55;
+  background: rgba(63, 138, 235, 0.6);
+}
+
+.btn-primary {
+  border: transparent;
+  background: rgba(63, 138, 235);
 }
 
 input:checked + label:after {
