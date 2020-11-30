@@ -12,51 +12,83 @@
   src: url('assets/fonts/CreteRound-Italic.ttf');
 }
 
+body {
+  background-image: url('/assets/images/wallpaper.jpg');
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover;
+  font-family: FormalItalic;
+  color: white;
+  margin-bottom: 15rem;
+}
+
 .card .btn {
   background: url('./assets/images/button.png');
-  background-repeat: no-repeat;
   background-size: cover;
   border: black 1px solid;
   border-radius: 0.5rem;
 }
 
-.navbar-light {
-  background-color: rgb(255, 255, 255, 0.95);
+@media (max-width:420px){
+  #searchForm {
+    width:11rem
+  }
 }
 
 .navbar a {
   font-size: large;
+  border-radius: 1rem;
+  margin-right: 0.2rem;
 }
 
-.navbar-transparent a:hover {
-  background-color: rgb(255, 255, 255, 0.3);
-  border-radius: 1rem;
+.navbar-light {
+  background-color: rgb(255, 255, 255);
+  border-bottom-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+}
+
+.navbar-light a {
+  background-color: rgb(0, 0, 0, 0.15);
 }
 
 .navbar-light a:hover {
-  background-color: rgb(0, 0, 0, 0.3);
-  border-radius: 1rem;
+  background-color: rgb(0, 0, 0, 0.4);
 }
 
 .navbar-transparent a {
   color: white;
+  background-color: rgb(255, 255, 255, 0.25);
+}
+
+.navbar-transparent a:hover {
+  background-color: rgb(255, 255, 255, 0.6);
 }
 
 .navbar-transparent input {
   background-color: white;
 }
 
-body {
-  background-image: url('/assets/images/wallpaper.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  font-family: FormalItalic;
-  padding-bottom: 500rem;
-  color: white;
+.coin-card {
+  height: 10rem;
 }
 
-.coin-box {
-  height: 10rem;
+.gif{
+  width: 5rem;
+  height: 5rem;
+}
+
+.navbar-transparent .nav-item.active .nav-link{
+  color:gray;
+  background-color: rgb(255,255,255,.9);
+}
+
+.navbar-light .nav-item.active .nav-link{
+  color:white;
+  background-color: rgb(0,0,0,.7);
+}
+
+.nav-item.active .nav-link:hover{
+  cursor: default;
 }
 
 .card {
@@ -74,6 +106,7 @@ body {
   margin-top: 1rem;
   padding: 1rem;
   color: white;
+  height:12rem
 }
 
 .left {

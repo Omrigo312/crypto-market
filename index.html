@@ -22,263 +22,43 @@
     <nav
       class="navbar navbar-transparent fixed-top navbar-expand-sm justify-content-between"
     >
-        <ul class="navbar-nav">
-          <li class="nav-item active">
+      <div>
+        <ul class="navbar-nav text-center">
+          <li class="nav-item active pt-1">
             <a class="nav-link" href="#">Home</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item pt-1">
             <a class="nav-link" href="#">Live Reports</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item pt-1">
             <a class="nav-link" href="#">About</a>
           </li>
         </ul>
-
-        <form class="form-inline my-2 my-lg-0">
+      </div>
+      <div id="searchForm">
+        <form class="form-inline">
           <input
-            class="form-control mr-sm-2"
+            class="form-control"
             type="search"
             placeholder="Search"
             aria-label="Search"
+            id="searchBar"
           />
           <input
-            class="btn btn-outline-success my-2 my-sm-0"
+            class="btn btn-outline-success"
             type="button"
             value="Search"
+            id="searchButton"
           />
         </form>
+      </div>
     </nav>
 
     <section id="coinBoard">
-      <h1 class="h2 text-center pt-5">Coins</h1>
+      <h1 class="h2 text-center pt-5">Crypto Currency</h1>
       <hr width="30%" />
       <div class="container">
-        <div class="row text-center">
-          <div class="coin-box card col-12 col-md-3 left">
-            <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <h5 class="card-title">BTC</h5>
-                <input type="checkbox" id="btcSwitch" /><label
-                  for="btcSwitch"
-                ></label>
-              </div>
-              <p class="card-text">Bitcoin</p>
-              <a
-                data-toggle="collapse"
-                href="#info1"
-                role="button"
-                aria-expanded="false"
-                class="btn btn-primary"
-                onclick="moreInfo(this)"
-                >More Info</a
-              >
-              <div class="collapse multi-collapse" id="info1">
-                <div class="coin-info">
-                  <p>0.43$<br />0.43$<br />0.43$</p>
-                  <img
-                    src="https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="coin-box card col-12 col-md-3 left">
-            <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <h5 class="card-title">BTC</h5>
-                <input type="checkbox" id="switch" /><label
-                  for="switch"
-                ></label>
-              </div>
-              <p class="card-text">Bitcoin</p>
-              <a
-                data-toggle="collapse"
-                href="#info2"
-                role="button"
-                aria-expanded="false"
-                class="btn btn-primary"
-                onclick="moreInfo(this)"
-                >More Info</a
-              >
-              <div class="collapse multi-collapse" id="info2">
-                <div class="coin-info">
-                  <p>0.43$<br />0.43$<br />0.43$</p>
-                  <img
-                    src="https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="coin-box card col-12 col-md-3 left">
-            <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <h5 class="card-title">BTC</h5>
-                <input type="checkbox" id="switch" /><label
-                  for="switch"
-                ></label>
-              </div>
-              <p class="card-text">Bitcoin</p>
-              <a
-                data-toggle="collapse"
-                href="#info3"
-                role="button"
-                aria-expanded="false"
-                class="btn btn-primary"
-                onclick="moreInfo(this)"
-                >More Info</a
-              >
-              <div class="collapse multi-collapse" id="info3">
-                <div class="coin-info">
-                  <p>0.43$<br />0.43$<br />0.43$</p>
-                  <img
-                    src="https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="coin-box card col-12 col-md-3 left">
-            <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <h5 class="card-title">BTC</h5>
-                <input type="checkbox" id="switch" /><label
-                  for="switch"
-                ></label>
-              </div>
-              <p class="card-text">Bitcoin</p>
-              <a
-                data-toggle="collapse"
-                href="#info4"
-                role="button"
-                aria-expanded="false"
-                class="btn btn-primary"
-                onclick="moreInfo(this)"
-                >More Info</a
-              >
-              <div class="collapse multi-collapse" id="info4">
-                <div class="coin-info">
-                  <p>0.43$<br />0.43$<br />0.43$</p>
-                  <img
-                    src="https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="coin-box card col-12 col-md-3 left">
-            <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <h5 class="card-title">BTC</h5>
-                <input type="checkbox" id="switch" /><label
-                  for="switch"
-                ></label>
-              </div>
-              <p class="card-text">Bitcoin</p>
-              <a
-                data-toggle="collapse"
-                href="#info5"
-                role="button"
-                aria-expanded="false"
-                class="btn btn-primary"
-                onclick="moreInfo(this)"
-                >More Info</a
-              >
-              <div class="collapse multi-collapse" id="info5">
-                <div class="coin-info">
-                  <p>0.43$<br />0.43$<br />0.43$</p>
-                  <img
-                    src="https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="coin-box card col-12 col-md-3 left">
-            <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <h5 class="card-title">BTC</h5>
-                <input type="checkbox" id="switch" /><label
-                  for="switch"
-                ></label>
-              </div>
-              <p class="card-text">Bitcoin</p>
-              <a
-                data-toggle="collapse"
-                href="#info6"
-                role="button"
-                aria-expanded="false"
-                class="btn btn-primary"
-                onclick="moreInfo(this)"
-                >More Info</a
-              >
-              <div class="collapse multi-collapse" id="info6">
-                <div class="coin-info">
-                  <p>0.43$<br />0.43$<br />0.43$</p>
-                  <img
-                    src="https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="coin-box card col-12 col-md-3 left">
-            <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <h5 class="card-title">BTC</h5>
-                <input type="checkbox" id="switch" /><label
-                  for="switch"
-                ></label>
-              </div>
-              <p class="card-text">Bitcoin</p>
-              <a
-                data-toggle="collapse"
-                href="#info7"
-                role="button"
-                aria-expanded="false"
-                class="btn btn-primary"
-                onclick="moreInfo(this)"
-                >More Info</a
-              >
-              <div class="collapse multi-collapse" id="info7">
-                <div class="coin-info">
-                  <p>0.43$<br />0.43$<br />0.43$</p>
-                  <img
-                    src="https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="coin-box card col-12 col-md-3 left">
-            <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <h5 class="card-title">BTC</h5>
-                <input type="checkbox" id="switch" /><label
-                  for="switch"
-                ></label>
-              </div>
-              <p class="card-text">Bitcoin</p>
-              <a
-                data-toggle="collapse"
-                href="#info8"
-                role="button"
-                aria-expanded="false"
-                class="btn btn-primary"
-                onclick="moreInfo(this)"
-                >More Info</a
-              >
-              <div class="collapse multi-collapse" id="info8">
-                <div class="coin-info">
-                  <p>0.43$<br />0.43$<br />0.43$</p>
-                  <img
-                    src="https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="row justify-content-center text-center" id="coinsRow"></div>
       </div>
     </section>
     <script src="main.js"></script>
