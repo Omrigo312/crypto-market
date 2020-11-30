@@ -11,6 +11,8 @@
     ></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+
     <link rel="stylesheet" href="style.css" />
     <link
       rel="icon"
@@ -65,15 +67,15 @@
       <div>
         <ul class="navbar-nav text-center">
           <li class="nav-item active pt-1">
-            <img src="./assets/images/logo.png" class="logo-image"/>
+            <img src="./assets/images/logo.png" class="logo-image" />
           </li>
-          <li class="nav-item active pt-1">
+          <li class="nav-item link active pt-1">
             <a class="nav-link" onclick="displayCoinCards()">Home</a>
           </li>
-          <li class="nav-item pt-1">
-            <a class="nav-link" href="#">Live Reports</a>
+          <li class="nav-item link pt-1">
+            <a class="nav-link" onclick="showLiveReports()">Live Reports</a>
           </li>
-          <li class="nav-item pt-1">
+          <li class="nav-item link pt-1">
             <a class="nav-link" href="#">About</a>
           </li>
         </ul>
@@ -105,6 +107,7 @@
         <div class="row justify-content-center text-center" id="coinsRow"></div>
       </div>
     </section>
+    <section id="liveReports"></section>
     <script src="main.js"></script>
   </body>
 </html>

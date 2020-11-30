@@ -10,7 +10,6 @@ $(document).ready(() => {
   $('#coinBoard').css('margin-top', $('.navbar').height());
   displayCoinCards();
   navbarActiveState();
-  // $('#coinsModal').modal();
 });
 
 function displayCoinCards() {
@@ -24,7 +23,7 @@ function displayCoinCards() {
   $.get(COINS_API_URL)
     .then(function (data) {
       for (let coin of data) {
-        allCoins[coin.id] = coin;
+        allCoins[coin.symbol] = coin;
         const coinCard = createCoinCard(coin);
         $('#coinsRow').append(coinCard);
       }
@@ -59,40 +58,40 @@ function showSearchResult(id = null, data = null) {
 }
 
 function createCoinCard(coinData) {
-  const { id, symbol, name } = coinData;
+  const { symbol, name } = coinData;
   const coinCard = `
   <div class="coin-card card col-12 col-md-6 col-lg-3 left "> 
     <div class="card-body">
       <div class="d-flex justify-content-between">
         <h5 class="card-title">${symbol.toUpperCase()}</h5>
-        <input type="checkbox" id="${id}Switch" class="${id}Switch" onclick="trackCoin(this, '${id}')" /><label
-          for="${id}Switch"
+        <input type="checkbox" id="${symbol}Switch" class="${symbol}Switch" onclick="trackCoin(this, '${symbol}')" /><label
+          for="${symbol}Switch"
         ></label>
       </div>
       <p class="card-text">${name}</p>
       <a
         data-toggle="collapse"
-        href="#${id}Collapse"
+        href="#${symbol}Collapse"
         role="button"
         aria-expanded="false"
         class="btn more-info-btn"
-        onclick="onMoreInfoButtonClick(this, '${id}')"
+        onclick="onMoreInfoButtonClick(this, '${symbol}')"
       >More Info</a>
-      <div class="collapse multi-collapse" id="${id}Collapse"></div>
+      <div class="collapse multi-collapse" id="${symbol}Collapse"></div>
     </div>
   </div>`;
   return coinCard;
 }
 
 function createCoinCardModal(coinData) {
-  const { id, symbol, name } = coinData;
+  const { symbol, name } = coinData;
   const coinCard = `
   <div class="coin-card modal-card card col-12 col-md-6 col-lg-4 left "> 
     <div class="card-body">
       <div class="d-flex justify-content-between">
         <h5 class="card-title">${symbol.toUpperCase()}</h5>
-        <input type="checkbox" id="${id}ModalSwitch" checked="checked" class="${id}Switch" onclick="trackCoin(this, '${id}')" /><label
-          for="${id}ModalSwitch"
+        <input type="checkbox" id="${symbol}ModalSwitch" checked="checked" class="${symbol}Switch" onclick="trackCoin(this, '${symbol}')" /><label
+          for="${symbol}ModalSwitch"
         ></label>
       </div>
       <p class="card-text">${name}</p>
@@ -207,6 +206,97 @@ function createCoinInfoTab(coinInfo) {
   );
 }
 
+function showLiveReports() {
+  let date = new Date();
+
+  let option = {
+    title: {
+      text: 'Live Currencies',
+    },
+    data: [],
+    toolTip: {
+      shared: true,
+    },
+    legend: {
+      cursor: 'pointer',
+      itemclick: toggleDataSeries,
+    },
+    options: {
+      scales: {
+        xAxes: [
+          {
+            type: 'time',
+            time: {
+              displayFormats: {
+                second: 'hh:mm:ss',
+              },
+            },
+          },
+        ],
+      },
+    },
+  };
+  $('#liveReports').CanvasJSChart(option);
+  let coinsInStringFormat = commaSeparatedString();
+  for (let coin of coinsToTrack) {
+    option.data.push(creatNewData(coin));
+  }
+  updateData();
+  var xValue = date;
+
+  function addData(data) {
+    for (let [index, coin] of coinsToTrack.entries()) {
+      option.data[index].dataPoints.push({
+        x: xValue,
+        y: data[coin.toUpperCase()].USD,
+      });
+      if (option.data[index].dataPoints.length > 10) {
+        option.data[index].dataPoints.splice(0, 1);
+      }
+    }
+    xValue = new Date();
+    $('#liveReports').CanvasJSChart().render();
+    setTimeout(updateData, 2000);
+  }
+
+  function updateData() {
+    $.getJSON(
+      `https://min-api.cryptocompare.com/data/pricemulti?fsyms=${coinsInStringFormat}&tsyms=USD`,
+      addData
+    );
+  }
+
+  function toggleDataSeries(e) {
+    if (typeof e.dataSeries.visible === 'undefined' || e.dataSeries.visible) {
+      e.dataSeries.visible = false;
+    } else {
+      e.dataSeries.visible = true;
+    }
+    e.chart.render();
+  }
+}
+
+function commaSeparatedString() {
+  let result = '';
+  for (let coin of coinsToTrack) {
+    result += `${coin},`;
+  }
+  return result;
+}
+
+function creatNewData(id) {
+  let dataPoints = [];
+  let newData = {
+    type: 'spline',
+    name: id,
+    showInLegend: true,
+    xValueFormatString: 'hh:mm:ss',
+    yValueFormatString: '#,##0.## $',
+    dataPoints: dataPoints,
+  };
+  return newData;
+}
+
 // Navbar transparent when reaching top screen
 $(window).scroll(() => {
   if ($(window).scrollTop() >= 50) {
@@ -220,7 +310,7 @@ $(window).scroll(() => {
 
 // Navbar buttons active state tracker
 function navbarActiveState() {
-  $('ul li').on('click', function () {
+  $('ul .link').on('click', function () {
     $('ul li').each(function () {
       if ($(this).hasClass('active')) {
         $(this).removeClass('active');
