@@ -22,22 +22,22 @@ body {
   margin-bottom: 15rem;
 }
 
-.more-info {
-  color:white;
+.more-info-btn {
+  color: white;
   background: url('./assets/images/button.png');
   background-size: cover;
   border: black 1px solid;
   border-radius: 0.5rem;
 }
 
-.more-info:hover{
-  color:white;
+.more-info-btn:hover {
+  color: white;
   background-color: black;
 }
 
-@media (max-width:420px){
+@media (max-width: 420px) {
   #searchForm {
-    width:11rem
+    width: 11rem;
   }
 }
 
@@ -78,22 +78,22 @@ body {
   height: 10rem;
 }
 
-.gif{
+.gif {
   width: 5rem;
   height: 5rem;
 }
 
-.navbar-transparent .nav-item.active .nav-link{
-  color:gray;
-  background-color: rgb(255,255,255,.9);
+.navbar-transparent .nav-item.active .nav-link {
+  color: gray;
+  background-color: rgb(255, 255, 255, 0.9);
 }
 
-.navbar-light .nav-item.active .nav-link{
-  color:white;
-  background-color: rgb(0,0,0,.7);
+.navbar-light .nav-item.active .nav-link {
+  color: white;
+  background-color: rgb(0, 0, 0, 0.7);
 }
 
-.nav-item.active .nav-link:hover{
+.nav-item.active .nav-link:hover {
   cursor: default;
 }
 
@@ -112,7 +112,7 @@ body {
   margin-top: 1rem;
   padding: 1rem;
   color: white;
-  height:12rem
+  height: 12rem;
 }
 
 .left {
@@ -121,6 +121,28 @@ body {
 
 .right {
   text-align: right;
+}
+
+.modal {
+  color: black;
+  text-align: center;
+}
+
+.modal-card {
+  color: white;
+  background: url('./assets/images/card.jpg');
+  background-size: cover;
+  border: black 1px solid;
+  border-radius: 0.5rem;
+}
+
+hr {
+  margin-top: 0;
+}
+
+.modal-title {
+  margin-top: 1rem;
+  font-size: x-large;
 }
 
 input[type='checkbox'] {
@@ -139,7 +161,7 @@ label {
   position: relative;
 }
 
-label:after {
+label::after {
   content: '';
   position: absolute;
   top: 5px;

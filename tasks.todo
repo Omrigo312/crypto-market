@@ -1,6 +1,6 @@
-☐ Save coin info in session storage.
-☐ Load coin info from session storage if exists
-☐ Delete coin info from session storage after 2 mins
+✔ Save coin info in session storage. @done(20-11-30 17:28)
+✔ Load coin info from session storage if exists @done(20-11-30 17:28)
+✔ Delete coin info from session storage after 2 mins @done(20-11-30 17:47)
 ☐ Add coins to tracking array
 ☐ Limit coins tracking array to 5 coins.
 ☐ Display modal when trying to add more than 5 coins.
