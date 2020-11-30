@@ -1,0 +1,8 @@
+☐ Save coin info in session storage.
+☐ Load coin info from session storage if exists
+☐ Delete coin info from session storage after 2 mins
+☐ Add coins to tracking array
+☐ Limit coins tracking array to 5 coins.
+☐ Display modal when trying to add more than 5 coins.
+☐ Write JQuery graph (copy from bar)
+☐ Write "on me" information page (Copy from my website)
