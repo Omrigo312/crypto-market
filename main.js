@@ -15,6 +15,12 @@ $(document).ready(() => {
 
 function displayCoinCards() {
   $('#coinsRow').empty();
+  if (allCoins) {
+    for (let coin of Object.values(allCoins)) {
+      const coinCard = createCoinCard(coin);
+      $('#coinsRow').append(coinCard);
+    }
+  }
   $.get(COINS_API_URL)
     .then(function (data) {
       for (let coin of data) {

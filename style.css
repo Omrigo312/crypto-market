@@ -97,8 +97,12 @@ body {
   background-color: rgb(0, 0, 0, 0.7);
 }
 
-.nav-item.active .nav-link:hover {
-  cursor: default;
+.logo-image {
+  width: 6rem;
+}
+
+.nav-item .nav-link:hover {
+  cursor: pointer;
 }
 
 .card {

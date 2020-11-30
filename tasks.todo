@@ -4,6 +4,7 @@
 ✔ Add coins to tracking array @done(20-11-30 22:30)
 ✔ Limit coins tracking array to 5 coins. @done(20-11-30 22:30)
 ✔ Display modal when trying to add more than 5 coins. @done(20-11-30 22:30)
-☐ Search Functionality
+✔ Search Functionality @done(20-12-01 00:02)
 ☐ Write JQuery graph (copy from bar)
 ☐ Write "on me" information page (Copy from my website)
+☐ Save followed to localStorage
