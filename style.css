@@ -15,7 +15,7 @@
 }
 
 body {
-  background-image: url('/assets/images/wallpaper.jpg');
+  background-image: url('./assets/images/wallpaper.jpg');
   background-attachment: fixed;
   background-position: center center;
   background-size: cover;
