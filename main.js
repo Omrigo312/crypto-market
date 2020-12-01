@@ -5,6 +5,8 @@ const MAX_COINS_TO_TRACK = 5;
 let allCoins = {};
 let coinsToTrack = [];
 let stagingCoinsToTrack = [];
+let showChart = false;
+let activeLink = 'homeLink';
 
 $(document).ready(() => {
   $('#coinBoard').css('margin-top', $('.navbar').height());
@@ -14,6 +16,9 @@ $(document).ready(() => {
 
 function displayCoinCards() {
   $('#coinsRow').empty();
+  activeLink = 'homeLink';
+  showChart = false;
+
   if (allCoins) {
     for (let coin of Object.values(allCoins)) {
       const coinCard = createCoinCard(coin);
@@ -29,6 +34,9 @@ function displayCoinCards() {
       }
     })
     .catch((msg) => console.error(msg));
+  for (let coin of coinsToTrack) {
+    handleCheckBox(coin, true);
+  }
 }
 
 function onSearchButtonClicked() {
@@ -58,7 +66,7 @@ function showSearchResult(id = null, data = null) {
 }
 
 function createCoinCard(coinData) {
-  const { symbol, name } = coinData;
+  const { id, symbol, name } = coinData;
   const coinCard = `
   <div class="coin-card card col-12 col-md-6 col-lg-3 left "> 
     <div class="card-body">
@@ -71,13 +79,13 @@ function createCoinCard(coinData) {
       <p class="card-text">${name}</p>
       <a
         data-toggle="collapse"
-        href="#${symbol}Collapse"
+        href="#${id}Collapse"
         role="button"
         aria-expanded="false"
         class="btn more-info-btn"
-        onclick="onMoreInfoButtonClick(this, '${symbol}')"
+        onclick="onMoreInfoButtonClick(this, '${id}')"
       >More Info</a>
-      <div class="collapse multi-collapse" id="${symbol}Collapse"></div>
+      <div class="collapse multi-collapse" id="${id}Collapse"></div>
     </div>
   </div>`;
   return coinCard;
@@ -207,54 +215,60 @@ function createCoinInfoTab(coinInfo) {
 }
 
 function showLiveReports() {
-  let date = new Date();
+  if (!coinsToTrack.length) {
+    return alert('You must select some coins first...');
+  }
+  activeLink = 'liveReportsLink';
+  showChart = true;
+  $('#header').html('Live Currency Chart');
+  $('#coinsRow').empty();
 
   let option = {
-    title: {
-      text: 'Live Currencies',
-    },
-    data: [],
-    toolTip: {
-      shared: true,
-    },
+    backgroundColor: 'rgb(255,255,255,.9)',
+    height: 500,
+    showInLegend: true,
     legend: {
       cursor: 'pointer',
       itemclick: toggleDataSeries,
     },
-    options: {
-      scales: {
-        xAxes: [
-          {
-            type: 'time',
-            time: {
-              displayFormats: {
-                second: 'hh:mm:ss',
-              },
-            },
-          },
-        ],
+    data: [],
+    axisX: {
+      title: 'Time',
+      labelFormatter: function (e) {
+        return CanvasJS.formatDate(e.value, 'HH:mm:ss');
       },
     },
+    axisY: {
+      title: 'Value ($)',
+    },
+    toolTip: {
+      shared: true,
+    },
+    exportEnabled: true,
+    animationEnabled: true,
   };
+
   $('#liveReports').CanvasJSChart(option);
+
   let coinsInStringFormat = commaSeparatedString();
   for (let coin of coinsToTrack) {
     option.data.push(creatNewData(coin));
   }
   updateData();
-  var xValue = date;
 
   function addData(data) {
+    if (!showChart) {
+      return;
+    }
     for (let [index, coin] of coinsToTrack.entries()) {
       option.data[index].dataPoints.push({
-        x: xValue,
+        x: new Date(),
         y: data[coin.toUpperCase()].USD,
       });
       if (option.data[index].dataPoints.length > 10) {
         option.data[index].dataPoints.splice(0, 1);
       }
     }
-    xValue = new Date();
     $('#liveReports').CanvasJSChart().render();
     setTimeout(updateData, 2000);
   }
@@ -265,15 +279,15 @@ function showLiveReports() {
       addData
     );
   }
+}
 
-  function toggleDataSeries(e) {
-    if (typeof e.dataSeries.visible === 'undefined' || e.dataSeries.visible) {
-      e.dataSeries.visible = false;
-    } else {
-      e.dataSeries.visible = true;
-    }
-    e.chart.render();
+function toggleDataSeries(e) {
+  if (typeof e.dataSeries.visible === 'undefined' || e.dataSeries.visible) {
+    e.dataSeries.visible = false;
+  } else {
+    e.dataSeries.visible = true;
   }
+  e.chart.render();
 }
 
 function commaSeparatedString() {
@@ -285,14 +299,13 @@ function commaSeparatedString() {
 }
 
 function creatNewData(id) {
-  let dataPoints = [];
-  let newData = {
+  const newData = {
     type: 'spline',
     name: id,
     showInLegend: true,
-    xValueFormatString: 'hh:mm:ss',
-    yValueFormatString: '#,##0.## $',
-    dataPoints: dataPoints,
+    xValueFormatString: 'MMM DD YYYY HH:mm:ss',
+    yValueFormatString: '$#,##0.##',
+    dataPoints: [],
   };
   return newData;
 }
@@ -311,11 +324,11 @@ $(window).scroll(() => {
 // Navbar buttons active state tracker
 function navbarActiveState() {
   $('ul .link').on('click', function () {
-    $('ul li').each(function () {
+    $('ul .link').each(function () {
       if ($(this).hasClass('active')) {
         $(this).removeClass('active');
       }
     });
-    $(this).addClass('active');
+    $(`#${activeLink}`).addClass('active');
   });
 }

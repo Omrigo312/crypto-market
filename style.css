@@ -158,6 +158,11 @@ hr {
   font-size: x-large;
 }
 
+#liveReports{
+  margin-left: 5rem;
+  margin-right: 5rem;
+}
+
 input[type='checkbox'] {
   height: 0;
   width: 0;

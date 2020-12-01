@@ -66,16 +66,16 @@
     >
       <div>
         <ul class="navbar-nav text-center">
-          <li class="nav-item active pt-1">
+          <li class="nav-item pt-1">
             <img src="./assets/images/logo.png" class="logo-image" />
           </li>
-          <li class="nav-item link active pt-1">
+          <li class="nav-item link active pt-1" id="homeLink">
             <a class="nav-link" onclick="displayCoinCards()">Home</a>
           </li>
-          <li class="nav-item link pt-1">
+          <li class="nav-item link pt-1" id="liveReportsLink">
             <a class="nav-link" onclick="showLiveReports()">Live Reports</a>
           </li>
-          <li class="nav-item link pt-1">
+          <li class="nav-item link pt-1" id="aboutLink">
             <a class="nav-link" href="#">About</a>
           </li>
         </ul>
@@ -101,7 +101,7 @@
     </nav>
 
     <section id="coinBoard">
-      <h1 class="h1 text-center pt-5">Crypto Currency</h1>
+      <h1 class="h1 text-center pt-5" id="header">Crypto Currencies</h1>
       <hr width="30%" />
       <div class="container">
         <div class="row justify-content-center text-center" id="coinsRow"></div>
