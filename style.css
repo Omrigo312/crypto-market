@@ -41,7 +41,7 @@ body {
   background-color: black;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 500px) {
   #searchForm {
     width: 11rem;
   }
@@ -172,11 +172,6 @@ hr {
 .modal-title {
   margin-top: 1rem;
   font-size: x-large;
-}
-
-#liveReports {
-  margin-left: 5rem;
-  margin-right: 5rem;
 }
 
 .jumbotron {
