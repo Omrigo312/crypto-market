@@ -6,12 +6,12 @@
 
 @font-face {
   font-family: 'Formal';
-  src: url('assets/fonts/CreteRound-Regular.ttf');
+  src: url('./assets/fonts/CreteRound-Regular.ttf');
 }
 
 @font-face {
   font-family: 'FormalItalic';
-  src: url('assets/fonts/CreteRound-Italic.ttf');
+  src: url('./assets/fonts/CreteRound-Italic.ttf');
 }
 
 body {
