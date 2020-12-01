@@ -14,8 +14,14 @@ $(document).ready(() => {
   navbarActiveState();
 });
 
-function displayCoinCards() {
+function emptyPage() {
+  $('#liveReports').empty();
+  $('#aboutMe').hide();
   $('#coinsRow').empty();
+}
+
+function displayCoinCards() {
+  emptyPage();
   activeLink = 'homeLink';
   showChart = false;
 
@@ -40,6 +46,8 @@ function displayCoinCards() {
 }
 
 function onSearchButtonClicked() {
+  emptyPage();
+  activeLink = 'homeLink';
   searchedTerm = $('#searchBar').prop('value');
   if (!searchedTerm) {
     return displayCoinCards();
@@ -53,7 +61,7 @@ function onSearchButtonClicked() {
 
 function showSearchResult(id = null, data = null) {
   if (data) {
-    $('#coinsRow').empty();
+    emptyPage();
     const coinCard = createCoinCard(data);
     $('#coinsRow').append(coinCard);
     $('#coinsRow').append(
@@ -214,6 +222,18 @@ function createCoinInfoTab(coinInfo) {
   );
 }
 
+function showAboutMe() {
+  emptyPage();
+  $('#aboutMe').show();
+  activeLink = 'aboutMeLink';
+  $('#header').html('About Me');
+  $.get('about-me.txt', function (textString) {
+    console.log(textString);
+  });
+
+  $('#aboutMe').append();
+}
+
 function showLiveReports() {
   if (!coinsToTrack.length) {
     return alert('You must select some coins first...');
@@ -221,7 +241,7 @@ function showLiveReports() {
   activeLink = 'liveReportsLink';
   showChart = true;
   $('#header').html('Live Currency Chart');
-  $('#coinsRow').empty();
+  emptyPage();
 
   let option = {
     backgroundColor: 'rgb(255,255,255,.9)',
