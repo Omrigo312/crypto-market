@@ -10,6 +10,9 @@ let activeLink = 'homeLink';
 
 $(document).ready(() => {
   $('#coinBoard').css('margin-top', $('.navbar').height());
+  if (localStorage.getItem('tracked') != null) {
+    coinsToTrack = JSON.parse(localStorage.getItem('tracked'));
+  }
   displayCoinCards();
   navbarActiveState();
 });
@@ -18,12 +21,12 @@ function emptyPage() {
   $('#liveReports').empty();
   $('#aboutMe').hide();
   $('#coinsRow').empty();
+  showChart = false;
 }
 
 function displayCoinCards() {
   emptyPage();
   activeLink = 'homeLink';
-  showChart = false;
 
   if (allCoins) {
     for (let coin of Object.values(allCoins)) {
@@ -37,6 +40,9 @@ function displayCoinCards() {
         allCoins[coin.symbol] = coin;
         const coinCard = createCoinCard(coin);
         $('#coinsRow').append(coinCard);
+      }
+      for (let coin of coinsToTrack) {
+        handleCheckBox(coin, true);
       }
     })
     .catch((msg) => console.error(msg));
@@ -134,6 +140,7 @@ function trackCoin(coinSwitch, id) {
       }
     }
   }
+  localStorage.setItem('tracked', JSON.stringify(coinsToTrack));
 }
 
 function handleCheckBox(id, check) {
@@ -227,11 +234,6 @@ function showAboutMe() {
   $('#aboutMe').show();
   activeLink = 'aboutMeLink';
   $('#header').html('About Me');
-  $.get('about-me.txt', function (textString) {
-    console.log(textString);
-  });
-
-  $('#aboutMe').append();
 }
 
 function showLiveReports() {
@@ -239,9 +241,9 @@ function showLiveReports() {
     return alert('You must select some coins first...');
   }
   activeLink = 'liveReportsLink';
-  showChart = true;
   $('#header').html('Live Currency Chart');
   emptyPage();
+  showChart = true;
 
   let option = {
     backgroundColor: 'rgb(255,255,255,.9)',
@@ -343,8 +345,16 @@ $(window).scroll(() => {
 
 // Navbar buttons active state tracker
 function navbarActiveState() {
-  $('ul .link').on('click', function () {
-    $('ul .link').each(function () {
+  $('.link').on('click', function () {
+    $('.link').each(function () {
+      if ($(this).hasClass('active')) {
+        $(this).removeClass('active');
+      }
+    });
+    $(`#${activeLink}`).addClass('active');
+  });
+  $('#searchButton').on('click', function () {
+    $('.link').each(function () {
       if ($(this).hasClass('active')) {
         $(this).removeClass('active');
       }
