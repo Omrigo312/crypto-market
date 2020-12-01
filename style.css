@@ -45,6 +45,16 @@ body {
   #searchForm {
     width: 11rem;
   }
+  .logo-image {
+    display: none;
+  }
+  .nav-item{
+    padding: 0.1rem;
+    width:7rem;
+  }
+  .nav-link{
+    height:2.2rem
+  }
 }
 
 #searchBar {
@@ -172,8 +182,6 @@ hr {
 .jumbotron {
   color: black;
   padding: 2rem 1rem;
-  margin-left: 5rem;
-  margin-right: 5rem;
   background: rgb(255, 255, 255, 0.8);
   border-radius: 3rem;
 }

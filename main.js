@@ -10,6 +10,7 @@ let activeLink = 'homeLink';
 
 $(document).ready(() => {
   $('#coinBoard').css('margin-top', $('.navbar').height());
+  console.log($('.navbar').height())
   if (localStorage.getItem('tracked') != null) {
     coinsToTrack = JSON.parse(localStorage.getItem('tracked'));
   }
