@@ -10,7 +10,6 @@ let activeLink = 'homeLink';
 
 $(document).ready(() => {
   $('#coinBoard').css('margin-top', $('.navbar').height());
-  console.log($('.navbar').height())
   if (localStorage.getItem('tracked') != null) {
     coinsToTrack = JSON.parse(localStorage.getItem('tracked'));
   }
@@ -28,6 +27,7 @@ function emptyPage() {
 function displayCoinCards() {
   emptyPage();
   activeLink = 'homeLink';
+  $('#header').html('Crypto Currencies');
 
   if (allCoins) {
     for (let coin of Object.values(allCoins)) {
@@ -55,7 +55,8 @@ function displayCoinCards() {
 function onSearchButtonClicked() {
   emptyPage();
   activeLink = 'homeLink';
-  searchedTerm = $('#searchBar').prop('value');
+  $('#header').html('Crypto Currencies');
+  searchedTerm = $('#searchBar').prop('value').trim();
   if (!searchedTerm) {
     return displayCoinCards();
   }
@@ -64,6 +65,7 @@ function onSearchButtonClicked() {
       return showSearchResult(id, coinData);
     }
   }
+  return showSearchResult();
 }
 
 function showSearchResult(id = null, data = null) {
@@ -71,13 +73,16 @@ function showSearchResult(id = null, data = null) {
     emptyPage();
     const coinCard = createCoinCard(data);
     $('#coinsRow').append(coinCard);
-    $('#coinsRow').append(
-      `<div class="mt-2 col-12"><button class="btn btn-primary" onclick="displayCoinCards()">Show All Coins</button></div>`
-    );
+
     if (coinsToTrack.includes(id)) {
       handleCheckBox(id, true);
     }
+  } else {
+    $('#header').html('No Results Found!<br/>Please search by coin symbol only (Bitcoin = BTC)');
   }
+  $('#coinsRow').append(
+    `<div class="mt-2 col-12"><button class="btn btn-primary" onclick="displayCoinCards()">Show All Coins</button></div>`
+  );
 }
 
 function createCoinCard(coinData) {
@@ -166,6 +171,7 @@ function onCancelButtonClicked() {
     handleCheckBox(coin, true);
   }
   handleCheckBox(coinsToTrack.pop(), false);
+  localStorage.setItem('tracked', JSON.stringify(coinsToTrack));
 }
 
 function onMoreInfoButtonClick(button, id) {
