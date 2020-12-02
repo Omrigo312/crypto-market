@@ -80,7 +80,7 @@
         </ul>
       </div>
       <div id="searchForm">
-        <form class="form-inline">
+        <form class="form-inline" onsubmit="onSearchButtonClicked(); return false">
           <input
             class="form-control"
             type="search"
@@ -90,8 +90,7 @@
           />
           <input
             class="btn btn-outline-success"
-            type="button"
-            onclick="onSearchButtonClicked()"
+            type="submit"
             value="Search"
             id="searchButton"
           />
